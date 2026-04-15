@@ -1,0 +1,10 @@
+# Original unprocessed screenshots (assets/ has the clean versions)
+Sbobbino_*.png
+Sobbino_*.png
+Sbobbino3_*.png
+
+# macOS
+.DS_Store
+
+# Claude Code project files
+.claude/
