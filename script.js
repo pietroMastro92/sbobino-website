@@ -85,12 +85,12 @@
     const spaceLayer = document.querySelector('.space-layer');
 
     // Orbital transfer — section configs
-    const sectionEls = document.querySelectorAll('.hero, #features, #screens, #demo, #workflow, #audience, #desktop, #cta');
+    const sectionEls = document.querySelectorAll('.hero, #demo, #features, #screens, #workflow, #audience, #desktop, #cta');
     const sectionConfigs = [
       { driftAngle: 0,   nebulaHue: 0,   rotation: 0   },  // hero
+      { driftAngle: -8,  nebulaHue: 15,  rotation: -1  },  // demo
       { driftAngle: 15,  nebulaHue: -10, rotation: 2   },  // features
       { driftAngle: -20, nebulaHue: 20,  rotation: -3  },  // screens
-      { driftAngle: -8,  nebulaHue: 15,  rotation: -1  },  // demo
       { driftAngle: 10,  nebulaHue: -15, rotation: 4   },  // workflow
       { driftAngle: -12, nebulaHue: 10,  rotation: -2  },  // audience
       { driftAngle: 8,   nebulaHue: -5,  rotation: 1   },  // desktop
