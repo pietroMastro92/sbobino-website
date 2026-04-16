@@ -406,7 +406,7 @@
 
   if (lightbox) {
     // Collect all clickable images (mac frames + hero screenshot)
-    const clickableImgs = document.querySelectorAll('.mac-frame img, .mac-frame-sm img, .hero-screenshot img');
+    const clickableImgs = document.querySelectorAll('.mac-frame img, .mac-frame-sm img, .screenshot-frame img, .hero-screenshot img');
 
     clickableImgs.forEach(img => {
       img.addEventListener('click', () => {
@@ -439,51 +439,50 @@
   /* ------------------------------------------------
      7. Interactive transcription demo
      ------------------------------------------------ */
+  // Word-level timestamps from Whisper (base model, word_timestamps=True)
+  // Text corrected to match the official transcript provided by the user
   const DEMO_TRANSCRIPT = {
     audioSrc: 'assets/demo-audio.mp3',
-    summary: 'The Artemis\u00a0II crew proposes naming two lunar craters: "Integrity," located on the far side near Ohm, and "Carroll" (C\u2011A\u2011R\u2011R\u2011O\u2011L\u2011L), on the nearside\u2011farside boundary northwest of Glushko \u2014 named in memory of Carol, a loved one from the astronaut family. Houston acknowledges the proposal.',
+    summary: 'The Artemis\u00a0II crew proposes naming two lunar craters: \u201cIntegrity,\u201d located on the far side near Ohm, and \u201cCarroll\u201d (C\u2011A\u2011R\u2011R\u2011O\u2011L\u2011L), on the nearside\u2011farside boundary northwest of Glushko \u2014 named in memory of Carol, a loved one from the astronaut family. Houston acknowledges the proposal.',
     segments: [
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 0,
-        text: 'line straight up to Ohm on the far side, relatively in the middle is an unnamed crater and we' },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 6,
-        text: 'would like to suggest it be called Integrity in the future.' },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 13,
-        text: 'And the second one, and especially meaningful for this crew, is a number of years ago we' },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 19,
-        text: 'started this journey in our close-knit astronaut family and we lost a loved one.' },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 26,
-        text: "And there's a feature in a really neat place on the moon, and it is on the nearside-farside boundary." },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 33,
-        text: "In fact, it's just on the nearside of that boundary." },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 36,
-        text: "And so at certain times of the moon's transit around Earth, we will be able to see this from Earth." },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 44,
-        text: 'And so we lost a loved one.' },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 46,
-        text: 'Her name was Carol, the spouse of Reed, the mother of Katie and Ellie.' },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 56,
-        text: "And if you want to find this one, you look at Glushko, and it's just to the northwest of that, at the same latitude as Ome, and it's a bright spot on the moon." },
-      { speaker: 1, speakerLabel: 'Integrity', startTime: 69,
-        text: 'And we would like to call it CAROL, and you spell that C-A-R-R-O-L-L.' },
-      { speaker: 2, speakerLabel: 'Houston', startTime: 85,
-        text: 'Integrity and Carol Crater, loud and clear. Thank you.' },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 0, words: [
+        {text:'line',time:0.46},{text:'straight',time:1.0},{text:'up',time:1.28},{text:'to',time:1.5},{text:'Ohm',time:1.74},{text:'on',time:2.24},{text:'the',time:2.54},{text:'far',time:2.66},{text:'side,',time:2.86},{text:'relatively',time:3.88},{text:'in',time:4.3},{text:'the',time:4.58},{text:'middle',time:4.64},{text:'is',time:4.92},{text:'an',time:5.32},{text:'unnamed',time:5.5},{text:'crater',time:5.76},{text:'and',time:6.0},{text:'we',time:6.1}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 6, words: [
+        {text:'would',time:6.62},{text:'like',time:6.82},{text:'to',time:6.98},{text:'suggest',time:7.12},{text:'it',time:7.28},{text:'be',time:7.56},{text:'called',time:7.78},{text:'Integrity',time:7.92},{text:'in',time:8.66},{text:'the',time:9.02},{text:'future.',time:9.12}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 13, words: [
+        {text:'And',time:13.52},{text:'the',time:14.08},{text:'second',time:14.64},{text:'one,',time:14.94},{text:'and',time:15.58},{text:'especially',time:15.78},{text:'meaningful',time:16.3},{text:'for',time:16.66},{text:'this',time:17.04},{text:'crew,',time:17.22},{text:'is',time:18.36},{text:'a',time:18.6},{text:'number',time:19.0},{text:'of',time:19.24},{text:'years',time:19.4},{text:'ago',time:19.56},{text:'we',time:19.92}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 19, words: [
+        {text:'started',time:20.16},{text:'this',time:20.42},{text:'journey',time:20.7},{text:'in',time:21.04},{text:'our',time:21.44},{text:'close-knit',time:21.72},{text:'astronaut',time:22.2},{text:'family',time:22.48},{text:'and',time:22.94},{text:'we',time:23.88},{text:'lost',time:24.26},{text:'a',time:24.4},{text:'loved',time:24.64},{text:'one.',time:24.84}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 26, words: [
+        {text:'And',time:26.56},{text:"there's",time:26.74},{text:'a',time:26.98},{text:'feature',time:27.18},{text:'in',time:28.02},{text:'a',time:28.8},{text:'really',time:28.9},{text:'neat',time:29.1},{text:'place',time:29.34},{text:'on',time:29.62},{text:'the',time:29.82},{text:'moon,',time:29.9},{text:'and',time:30.68},{text:'it',time:30.8},{text:'is',time:30.94},{text:'on',time:31.14},{text:'the',time:31.3},{text:'nearside-farside',time:31.54},{text:'boundary.',time:33.06}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 33, words: [
+        {text:'In',time:34.14},{text:'fact,',time:34.22},{text:"it's",time:34.58},{text:'just',time:34.68},{text:'on',time:34.8},{text:'the',time:35.02},{text:'nearside',time:35.2},{text:'of',time:35.5},{text:'that',time:35.92},{text:'boundary.',time:36.12}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 36, words: [
+        {text:'And',time:37.3},{text:'so',time:37.32},{text:'at',time:37.52},{text:'certain',time:37.66},{text:'times',time:37.96},{text:'of',time:38.56},{text:'the',time:39.9},{text:"moon's",time:40.1},{text:'transit',time:41.36},{text:'around',time:41.72},{text:'Earth,',time:41.98},{text:'we',time:43.46},{text:'will',time:43.68},{text:'be',time:43.82},{text:'able',time:43.94},{text:'to',time:44.04},{text:'see',time:44.16},{text:'this',time:44.36},{text:'from',time:44.56},{text:'Earth.',time:44.78}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 44, words: [
+        {text:'And',time:45.92},{text:'so',time:46.02},{text:'we',time:46.18},{text:'lost',time:46.28},{text:'a',time:46.5},{text:'loved',time:46.66},{text:'one.',time:46.84}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 46, words: [
+        {text:'Her',time:47.7},{text:'name',time:47.94},{text:'was',time:48.12},{text:'Carol,',time:48.3},{text:'the',time:50.46},{text:'spouse',time:50.9},{text:'of',time:51.2},{text:'Reed,',time:51.42},{text:'the',time:51.68},{text:'mother',time:52.2},{text:'of',time:52.48},{text:'Katie',time:53.4},{text:'and',time:53.82},{text:'Ellie.',time:54.16}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 56, words: [
+        {text:'And',time:57.86},{text:'if',time:58.38},{text:'you',time:58.54},{text:'want',time:58.62},{text:'to',time:58.74},{text:'find',time:58.82},{text:'this',time:59.02},{text:'one,',time:59.26},{text:'you',time:59.68},{text:'look',time:59.7},{text:'at',time:59.86},{text:'Glushko,',time:60.02},{text:'and',time:62.2},{text:"it's",time:62.72},{text:'just',time:63.0},{text:'to',time:63.24},{text:'the',time:63.5},{text:'northwest',time:63.56},{text:'of',time:63.9},{text:'that,',time:64.24},{text:'at',time:64.68},{text:'the',time:65.0},{text:'same',time:65.1},{text:'latitude',time:65.32},{text:'as',time:65.68},{text:'Ome,',time:65.98},{text:'and',time:66.6},{text:"it's",time:66.68},{text:'a',time:66.88},{text:'bright',time:67.0},{text:'spot',time:67.64},{text:'on',time:68.02},{text:'the',time:68.68},{text:'moon.',time:68.8}
+      ]},
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 69, words: [
+        {text:'And',time:71.3},{text:'we',time:71.82},{text:'would',time:71.96},{text:'like',time:72.16},{text:'to',time:72.28},{text:'call',time:72.46},{text:'it',time:72.74},{text:'CAROL,',time:72.94},{text:'and',time:74.44},{text:'you',time:74.96},{text:'spell',time:75.06},{text:'that',time:75.32},{text:'C-A-R-R-O-L-L.',time:75.5}
+      ]},
+      { speaker: 2, speakerLabel: 'Houston', startTime: 85, words: [
+        {text:'Integrity',time:85.98},{text:'and',time:86.52},{text:'Carol',time:86.96},{text:'Crater,',time:87.28},{text:'loud',time:88.18},{text:'and',time:88.28},{text:'clear.',time:88.4},{text:'Thank',time:89.12},{text:'you.',time:89.24}
+      ]},
     ]
   };
-
-  // Pre-compute word-level timing for each segment
-  (function prepareWordTimings() {
-    const segs = DEMO_TRANSCRIPT.segments;
-    for (let i = 0; i < segs.length; i++) {
-      const seg = segs[i];
-      const words = seg.text.split(/\s+/);
-      const nextStart = (i + 1 < segs.length) ? segs[i + 1].startTime : seg.startTime + 6;
-      const duration = nextStart - seg.startTime;
-      seg.words = words.map((w, j) => ({
-        text: w,
-        time: seg.startTime + (j / words.length) * duration * 0.85 // leave 15% tail
-      }));
-    }
-  })();
 
   const demoPlay = document.getElementById('demo-play');
   const demoReset = document.getElementById('demo-reset');
@@ -504,6 +503,7 @@
     let isPlaying = false;
     let segmentEls = []; // track created segment DOMs
     let summaryTimer = null;
+    let resetting = false;
 
     function formatTime(s) {
       const m = Math.floor(s / 60);
@@ -533,6 +533,7 @@
 
     // Reset
     demoReset.addEventListener('click', () => {
+      resetting = true;
       audio.pause();
       audio.currentTime = 0;
       updatePlayButton(false);
@@ -544,8 +545,9 @@
       // Hide summary
       if (demoSummary) { demoSummary.hidden = true; demoSummary.classList.remove('visible'); }
       if (demoProgressFill) demoProgressFill.style.width = '0%';
-      if (demoDuration) demoDuration.textContent = '0:00 / 0:00';
+      if (demoDuration) demoDuration.textContent = '0:00 / ' + formatTime(audio.duration || 91);
       if (summaryTimer) { clearTimeout(summaryTimer); summaryTimer = null; }
+      setTimeout(() => { resetting = false; }, 100);
     });
 
     // Time update — reveal words
@@ -561,6 +563,7 @@
     });
 
     function revealWords(t) {
+      if (resetting) return;
       const segs = DEMO_TRANSCRIPT.segments;
       let needsScroll = false;
 
@@ -571,15 +574,15 @@
         // Create segment DOM if needed
         if (!segmentEls[i]) {
           const div = document.createElement('div');
-          div.className = 'demo-segment';
+          div.className = 'demo-segment demo-segment-s' + seg.speaker;
           div.innerHTML =
             '<div class="demo-segment-meta">' +
               '<span class="demo-speaker demo-speaker-' + seg.speaker + '">' + seg.speakerLabel + '</span>' +
-              '<span class="demo-timestamp">' + formatTime(seg.startTime) + '</span>' +
             '</div>' +
             '<p class="demo-segment-text">' +
               seg.words.map(w => '<span class="demo-word" data-time="' + w.time + '">' + w.text + '</span>').join(' ') +
-            '</p>';
+            '</p>' +
+            '<span class="demo-timestamp">' + formatTime(seg.startTime) + '</span>';
           demoTranscript.appendChild(div);
           segmentEls[i] = div;
           // Trigger entrance animation
@@ -620,20 +623,9 @@
       }
     }
 
-    // Audio ended — show summary
+    // Audio ended
     audio.addEventListener('ended', () => {
       updatePlayButton(false);
-      if (demoSummary && demoSummaryText) {
-        summaryTimer = setTimeout(() => {
-          demoSummaryText.textContent = DEMO_TRANSCRIPT.summary;
-          demoSummary.hidden = false;
-          requestAnimationFrame(() => { demoSummary.classList.add('visible'); });
-          demoTranscript.scrollTo({
-            top: demoTranscript.scrollHeight + 200,
-            behavior: prefersReducedMotion ? 'auto' : 'smooth'
-          });
-        }, 800);
-      }
     });
 
     // Duration display once metadata loads
@@ -647,11 +639,6 @@
         const rect = demoProgressBar.getBoundingClientRect();
         const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
         audio.currentTime = ratio * (audio.duration || 91);
-        // Hide summary if seeking before end
-        if (demoSummary && ratio < 0.98) {
-          demoSummary.hidden = true;
-          demoSummary.classList.remove('visible');
-        }
       }
 
       demoProgressBar.addEventListener('click', seekTo);

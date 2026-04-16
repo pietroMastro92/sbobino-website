@@ -111,7 +111,50 @@
           <!-- Mac titlebar -->
           <div class="mac-titlebar">
             <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
-            <span class="mac-title-text">artemis-ii-names-new-craters-integrity-and-carroll.mp3 — Trim 00:45-02:16</span>
+          </div>
+
+          <!-- App toolbar -->
+          <div class="demo-toolbar">
+            <div class="demo-toolbar-left">
+              <button class="demo-toolbar-btn" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              </button>
+              <button class="demo-toolbar-btn" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <span class="demo-toolbar-filename">artemis-ii-names-new-craters-integrity-and-carroll.mp3</span>
+            </div>
+            <div class="demo-toolbar-right">
+              <!-- edit -->
+              <button class="demo-toolbar-btn" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </button>
+              <!-- clipboard -->
+              <button class="demo-toolbar-btn" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+              <!-- wand / AI -->
+              <button class="demo-toolbar-btn" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8L19 13"/><path d="M15 9h0"/><path d="M17.8 6.2L19 5"/><path d="M11 6.2L9.7 5"/><path d="M11 11.8L9.7 13"/><line x1="2" y1="22" x2="22" y2="2"/></svg>
+              </button>
+              <!-- speech bubble -->
+              <button class="demo-toolbar-btn" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </button>
+              <!-- grid -->
+              <button class="demo-toolbar-btn" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+              </button>
+              <button class="demo-toolbar-export" aria-hidden="true">Export <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <!-- sidebar toggle icons -->
+              <span class="demo-toolbar-sep"></span>
+              <button class="demo-toolbar-btn" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+              </button>
+              <button class="demo-toolbar-btn demo-toolbar-btn-active" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="1"/></svg>
+              </button>
+            </div>
           </div>
 
           <div class="demo-app-body">
@@ -135,6 +178,11 @@
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
                 artemis-ii-n…
               </div>
+              <div class="demo-sidebar-divider"></div>
+              <div class="demo-sidebar-item demo-sidebar-icon demo-sidebar-bottom">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 6 6"/><path d="M19 6h-7"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="3" y1="12" x2="7" y2="12"/><path d="M19 18h-7"/><polyline points="3 18 5 18 6 18"/></svg>
+                Recently Deleted
+              </div>
             </aside>
 
             <!-- Main content: segments -->
@@ -150,41 +198,78 @@
                   <p>Press <strong>Play</strong> to start the transcription demo.</p>
                 </div>
               </div>
-
-              <!-- Summary panel -->
-              <div class="demo-summary" id="demo-summary" hidden>
-                <div class="demo-summary-header">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
-                  <span>Summary</span>
-                </div>
-                <p id="demo-summary-text"></p>
-              </div>
             </main>
 
             <!-- Right sidebar -->
             <aside class="demo-sidebar-right">
+              <div class="demo-panel-header">
+                <button class="demo-panel-copy" aria-hidden="true">Copy</button>
+              </div>
               <div class="demo-panel-tabs">
-                <span class="demo-panel-tab">Transcript</span>
-                <span class="demo-panel-tab demo-panel-tab-active">Segments</span>
+                <span class="demo-panel-tab">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  Transcript
+                </span>
+                <span class="demo-panel-tab demo-panel-tab-active">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  Segments
+                </span>
               </div>
               <div class="demo-panel-section">
                 <div class="demo-panel-label">Audio</div>
-                <div class="demo-panel-row"><span class="demo-panel-key">File</span><span class="demo-panel-val" id="demo-panel-file">artemis-ii-names…</span></div>
-                <div class="demo-panel-row"><span class="demo-panel-key">Title</span><span class="demo-panel-val">artemis-ii-names-new-craters…</span></div>
+                <div class="demo-panel-row"><span class="demo-panel-key">File</span><span class="demo-panel-val">artemis-ii-names-new-craters-integrity-and-carr…</span></div>
+                <div class="demo-panel-row"><span class="demo-panel-key">Format</span><span class="demo-panel-val"></span></div>
+                <div class="demo-panel-row"><span class="demo-panel-key">Duration</span><span class="demo-panel-val"></span></div>
+                <div class="demo-panel-row"><span class="demo-panel-key">Title</span><span class="demo-panel-val">artemis-ii-names-new-craters-integrity-and-carroll.</span></div>
               </div>
               <div class="demo-panel-section">
                 <div class="demo-panel-label">People</div>
-                <div class="demo-panel-speakers" id="demo-panel-speakers">
-                  <span class="demo-speaker-chip demo-speaker-chip-1">Integrity</span>
+                <div class="demo-panel-subhead">Houston</div>
+                <div class="demo-panel-row"><span class="demo-panel-val demo-detected">Detected speakers</span></div>
+                <div class="demo-panel-speakers">
                   <span class="demo-speaker-chip demo-speaker-chip-2">Houston</span>
+                  <span class="demo-color-swatch" style="background:#4F7CFF"></span>
+                  <span class="demo-speaker-chip demo-speaker-chip-1">Integrity</span>
+                  <span class="demo-color-swatch" style="background:#EC6A5E"></span>
                 </div>
-                <div class="demo-panel-row"><span class="demo-panel-val demo-detected" id="demo-speaker-count">2 speakers detected</span></div>
+                <div class="demo-panel-row" style="margin-top:8px"><span class="demo-panel-key" style="opacity:0.5;font-size:0.68rem">Merge speakers</span></div>
+                <div class="demo-merge-row">
+                  <span class="demo-merge-select">Houston</span>
+                  <span class="demo-merge-into">into</span>
+                  <span class="demo-merge-select">Integrity</span>
+                  <span class="demo-merge-btn">Merge</span>
+                </div>
+                <div class="demo-assign-row">
+                  <span class="demo-merge-select" style="flex:1">Houston</span>
+                  <span class="demo-merge-btn">Assign</span>
+                  <span class="demo-merge-btn">Rename</span>
+                </div>
+                <div class="demo-panel-row" style="margin-top:8px">
+                  <span class="demo-panel-key">Propagate to adjacent unlabeled segments</span>
+                  <span class="demo-checkbox"></span>
+                </div>
+                <div class="demo-panel-hint">Speaker label is saved into segment metadata. Right-click a segment for quick actions.</div>
               </div>
               <div class="demo-panel-section">
                 <div class="demo-panel-label">Options</div>
                 <div class="demo-panel-row">
                   <span class="demo-panel-key">Font Size</span>
-                  <span class="demo-panel-val">18</span>
+                  <span class="demo-stepper-input">14
+                    <span class="demo-stepper-arrows">
+                      <span class="demo-stepper-up"></span>
+                      <span class="demo-stepper-down"></span>
+                    </span>
+                  </span>
+                </div>
+                <div class="demo-panel-row">
+                  <span class="demo-panel-key">Favorites Only</span>
+                  <span class="demo-checkbox"></span>
+                </div>
+                <div class="demo-panel-row">
+                  <span class="demo-panel-key">Group segments without speakers</span>
+                  <span class="demo-toggle-switch demo-toggle-switch-on">
+                    <span class="demo-toggle-switch-dot"></span>
+                  </span>
                 </div>
               </div>
             </aside>
@@ -196,15 +281,28 @@
               <svg class="demo-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
               <svg class="demo-icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
             </button>
+            <span class="demo-player-toggle">
+              <span class="demo-toggle-dot"></span>
+            </span>
             <div class="demo-progress" role="slider" aria-label="Audio position"
                  aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
                  tabindex="0" id="demo-progress">
               <div class="demo-progress-fill" id="demo-progress-fill"></div>
             </div>
             <span class="demo-duration" id="demo-duration">0:00 / 0:00</span>
+            <span class="demo-player-speed">1x</span>
             <button class="demo-player-reset" id="demo-reset" aria-label="Restart demo" title="Restart">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
             </button>
+            <button class="demo-toolbar-btn" aria-hidden="true" style="margin-left:2px">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <!-- Settings link (bottom-left like app) -->
+          <div class="demo-settings-bar">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            <span>Settings</span>
           </div>
         </div>
 
@@ -285,10 +383,7 @@
             <h3>Your transcript, front and center.</h3>
             <p>The full transcript view with speaker panel, timestamped segments, confidence highlighting, and editing tools — everything about your recording in one focused workspace.</p>
           </div>
-          <div class="mac-frame showcase-frame-enter">
-            <div class="mac-titlebar">
-              <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
-            </div>
+          <div class="screenshot-frame showcase-frame-enter">
             <img src="assets/transcription-workspace.png" alt="Sbobino transcript workspace with full text, speaker sidebar, and settings" loading="lazy">
           </div>
         </div>
@@ -300,19 +395,13 @@
             <h3>Long recording, short summary.</h3>
             <p>Generate structured, narrative summaries from any transcript. Sbobino identifies key topics, extracts main points, and produces clear, readable output.</p>
           </div>
-          <div class="mac-frame showcase-frame-enter">
-            <div class="mac-titlebar">
-              <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
-            </div>
+          <div class="screenshot-frame showcase-frame-enter">
             <img src="assets/summary.png" alt="Sbobino summary view with structured narrative output" loading="lazy">
           </div>
         </div>
 
         <div class="showcase-panel showcase-panel--right">
-          <div class="mac-frame showcase-frame-enter">
-            <div class="mac-titlebar">
-              <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
-            </div>
+          <div class="screenshot-frame showcase-frame-enter">
             <img src="assets/chat-qa.png" alt="Chat interface for asking questions about transcript content" loading="lazy">
           </div>
           <div class="showcase-text showcase-text-enter">
@@ -328,10 +417,7 @@
             <h3>Who said what.</h3>
             <p>Browse timestamped segments with speaker labels. Use local diarization to identify voices in multi-speaker recordings — meetings, interviews, and group conversations.</p>
           </div>
-          <div class="mac-frame showcase-frame-enter">
-            <div class="mac-titlebar">
-              <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
-            </div>
+          <div class="screenshot-frame showcase-frame-enter">
             <img src="assets/speaker-diarization.png" alt="Speaker diarization view with labeled speakers and timestamped segments" loading="lazy">
           </div>
         </div>
@@ -339,10 +425,7 @@
         <!-- Tier 3: Compact row -->
         <div class="showcase-row">
           <div class="showcase-card showcase-card-enter">
-            <div class="mac-frame-sm">
-              <div class="mac-titlebar">
-                <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
-              </div>
+            <div class="screenshot-frame screenshot-frame-sm">
               <img src="assets/export-dialog.png" alt="Export dialog with format options including DOCX, PDF, SRT, and more" loading="lazy">
             </div>
             <h4>Export Everywhere</h4>
@@ -350,10 +433,7 @@
           </div>
 
           <div class="showcase-card showcase-card-enter">
-            <div class="mac-frame-sm">
-              <div class="mac-titlebar">
-                <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
-              </div>
+            <div class="screenshot-frame screenshot-frame-sm">
               <img src="assets/emotion-analysis.png" alt="Emotion analysis timeline with segment-level emotional insights" loading="lazy">
             </div>
             <h4>Emotion Analysis</h4>
@@ -361,10 +441,7 @@
           </div>
 
           <div class="showcase-card showcase-card-enter">
-            <div class="mac-frame-sm">
-              <div class="mac-titlebar">
-                <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
-              </div>
+            <div class="screenshot-frame screenshot-frame-sm">
               <img src="assets/confidence-trim.png" alt="Transcript with color-coded confidence highlighting and audio waveform" loading="lazy">
             </div>
             <h4>Confidence &amp; Trimming</h4>
