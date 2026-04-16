@@ -60,6 +60,7 @@
       <nav class="nav-links" id="nav-links">
         <a href="#features">Features</a>
         <a href="#screens">Screenshots</a>
+        <a href="#demo">Try It</a>
         <a href="#workflow">How it works</a>
         <a href="#audience">Who it's for</a>
       </nav>
@@ -255,6 +256,73 @@
             </div>
             <h4>Confidence &amp; Trimming</h4>
             <p>Color-coded accuracy, audio trimming, and re-transcription.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== INTERACTIVE DEMO ========== -->
+    <section class="section" id="demo">
+      <div class="wrap">
+        <span class="overline">Try It</span>
+        <h2 class="section-title">Hear it. See it. Get it.</h2>
+        <p class="section-sub">Play the sample and watch Sbobino transcribe in real time — word by word, speaker by speaker.</p>
+
+        <div class="demo-spotlight">
+          <!-- Left: controls -->
+          <div class="demo-controls showcase-text-enter">
+            <div class="demo-info">
+              <span class="demo-label">🎙️ Artemis II — Naming lunar craters</span>
+              <span class="demo-duration" id="demo-duration">0:00 / 0:00</span>
+            </div>
+
+            <div class="demo-progress" role="slider" aria-label="Audio position"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                 tabindex="0" id="demo-progress">
+              <div class="demo-progress-fill" id="demo-progress-fill"></div>
+            </div>
+
+            <div class="demo-buttons">
+              <button class="btn btn-primary demo-play-btn" id="demo-play" aria-label="Play demo">
+                <svg class="demo-icon-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                <svg class="demo-icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                <span id="demo-play-label">Play</span>
+              </button>
+              <button class="btn btn-ghost demo-reset-btn" id="demo-reset" aria-label="Restart demo">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                Restart
+              </button>
+            </div>
+
+            <p class="demo-hint">A real NASA Artemis II audio clip — transcribed live, just like Sbobino does it.</p>
+          </div>
+
+          <!-- Right: Mac frame with transcript -->
+          <div class="mac-frame demo-frame showcase-frame-enter" id="demo-frame">
+            <div class="mac-titlebar">
+              <span class="mac-dot"></span><span class="mac-dot"></span><span class="mac-dot"></span>
+              <span class="mac-title-text">Sbobino — Transcript</span>
+            </div>
+            <div class="demo-transcript" id="demo-transcript" aria-live="polite" aria-atomic="false">
+              <div class="demo-placeholder" id="demo-placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="23"/>
+                  <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <p>Press <strong>Play</strong> to start the transcription demo.</p>
+              </div>
+            </div>
+
+            <!-- Summary panel -->
+            <div class="demo-summary" id="demo-summary" hidden>
+              <div class="demo-summary-header">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+                <span>Summary</span>
+              </div>
+              <p id="demo-summary-text"></p>
+            </div>
           </div>
         </div>
       </div>

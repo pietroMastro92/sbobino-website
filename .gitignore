@@ -3,6 +3,10 @@ Sbobbino_*.png
 Sobbino_*.png
 Sbobbino3_*.png
 
+# Original long audio + transcript source
+assets/artemis-ii-*.mp3
+assets/*.txt
+
 # macOS
 .DS_Store
 

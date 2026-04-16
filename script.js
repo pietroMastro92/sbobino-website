@@ -85,11 +85,12 @@
     const spaceLayer = document.querySelector('.space-layer');
 
     // Orbital transfer — section configs
-    const sectionEls = document.querySelectorAll('.hero, #features, #screens, #workflow, #audience, #desktop, #cta');
+    const sectionEls = document.querySelectorAll('.hero, #features, #screens, #demo, #workflow, #audience, #desktop, #cta');
     const sectionConfigs = [
       { driftAngle: 0,   nebulaHue: 0,   rotation: 0   },  // hero
       { driftAngle: 15,  nebulaHue: -10, rotation: 2   },  // features
       { driftAngle: -20, nebulaHue: 20,  rotation: -3  },  // screens
+      { driftAngle: -8,  nebulaHue: 15,  rotation: -1  },  // demo
       { driftAngle: 10,  nebulaHue: -15, rotation: 4   },  // workflow
       { driftAngle: -12, nebulaHue: 10,  rotation: -2  },  // audience
       { driftAngle: 8,   nebulaHue: -5,  rotation: 1   },  // desktop
@@ -433,6 +434,243 @@
         closeLightbox();
       }
     });
+  }
+
+  /* ------------------------------------------------
+     7. Interactive transcription demo
+     ------------------------------------------------ */
+  const DEMO_TRANSCRIPT = {
+    audioSrc: 'assets/demo-audio.mp3',
+    summary: 'The Artemis\u00a0II crew proposes naming two lunar craters: "Integrity," located on the far side near Ohm, and "Carroll" (C\u2011A\u2011R\u2011R\u2011O\u2011L\u2011L), on the nearside\u2011farside boundary northwest of Glushko \u2014 named in memory of Carol, a loved one from the astronaut family. Houston acknowledges the proposal.',
+    segments: [
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 0,
+        text: 'line straight up to Ohm on the far side, relatively in the middle is an unnamed crater and we' },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 6,
+        text: 'would like to suggest it be called Integrity in the future.' },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 13,
+        text: 'And the second one, and especially meaningful for this crew, is a number of years ago we' },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 19,
+        text: 'started this journey in our close-knit astronaut family and we lost a loved one.' },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 26,
+        text: "And there's a feature in a really neat place on the moon, and it is on the nearside-farside boundary." },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 33,
+        text: "In fact, it's just on the nearside of that boundary." },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 36,
+        text: "And so at certain times of the moon's transit around Earth, we will be able to see this from Earth." },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 44,
+        text: 'And so we lost a loved one.' },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 46,
+        text: 'Her name was Carol, the spouse of Reed, the mother of Katie and Ellie.' },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 56,
+        text: "And if you want to find this one, you look at Glushko, and it's just to the northwest of that, at the same latitude as Ome, and it's a bright spot on the moon." },
+      { speaker: 1, speakerLabel: 'Integrity', startTime: 69,
+        text: 'And we would like to call it CAROL, and you spell that C-A-R-R-O-L-L.' },
+      { speaker: 2, speakerLabel: 'Houston', startTime: 85,
+        text: 'Integrity and Carol Crater, loud and clear. Thank you.' },
+    ]
+  };
+
+  // Pre-compute word-level timing for each segment
+  (function prepareWordTimings() {
+    const segs = DEMO_TRANSCRIPT.segments;
+    for (let i = 0; i < segs.length; i++) {
+      const seg = segs[i];
+      const words = seg.text.split(/\s+/);
+      const nextStart = (i + 1 < segs.length) ? segs[i + 1].startTime : seg.startTime + 6;
+      const duration = nextStart - seg.startTime;
+      seg.words = words.map((w, j) => ({
+        text: w,
+        time: seg.startTime + (j / words.length) * duration * 0.85 // leave 15% tail
+      }));
+    }
+  })();
+
+  const demoPlay = document.getElementById('demo-play');
+  const demoReset = document.getElementById('demo-reset');
+  const demoTranscript = document.getElementById('demo-transcript');
+  const demoPlaceholder = document.getElementById('demo-placeholder');
+  const demoSummary = document.getElementById('demo-summary');
+  const demoSummaryText = document.getElementById('demo-summary-text');
+  const demoProgressBar = document.getElementById('demo-progress');
+  const demoProgressFill = document.getElementById('demo-progress-fill');
+  const demoDuration = document.getElementById('demo-duration');
+  const demoPlayLabel = document.getElementById('demo-play-label');
+  const demoIconPlay = demoPlay ? demoPlay.querySelector('.demo-icon-play') : null;
+  const demoIconPause = demoPlay ? demoPlay.querySelector('.demo-icon-pause') : null;
+
+  if (demoPlay && demoTranscript) {
+    const audio = new Audio(DEMO_TRANSCRIPT.audioSrc);
+    audio.preload = 'auto';
+    let isPlaying = false;
+    let segmentEls = []; // track created segment DOMs
+    let summaryTimer = null;
+
+    function formatTime(s) {
+      const m = Math.floor(s / 60);
+      const sec = Math.floor(s % 60);
+      return m + ':' + String(sec).padStart(2, '0');
+    }
+
+    function updatePlayButton(playing) {
+      isPlaying = playing;
+      if (demoIconPlay) demoIconPlay.style.display = playing ? 'none' : '';
+      if (demoIconPause) demoIconPause.style.display = playing ? '' : 'none';
+      if (demoPlayLabel) demoPlayLabel.textContent = playing ? 'Pause' : 'Play';
+    }
+
+    // Play / Pause
+    demoPlay.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        updatePlayButton(false);
+      } else {
+        // Hide placeholder on first play
+        if (demoPlaceholder) demoPlaceholder.style.display = 'none';
+        audio.play();
+        updatePlayButton(true);
+      }
+    });
+
+    // Reset
+    demoReset.addEventListener('click', () => {
+      audio.pause();
+      audio.currentTime = 0;
+      updatePlayButton(false);
+      // Clear segments
+      segmentEls.forEach(el => el.remove());
+      segmentEls = [];
+      // Show placeholder
+      if (demoPlaceholder) demoPlaceholder.style.display = '';
+      // Hide summary
+      if (demoSummary) { demoSummary.hidden = true; demoSummary.classList.remove('visible'); }
+      if (demoProgressFill) demoProgressFill.style.width = '0%';
+      if (demoDuration) demoDuration.textContent = '0:00 / 0:00';
+      if (summaryTimer) { clearTimeout(summaryTimer); summaryTimer = null; }
+    });
+
+    // Time update — reveal words
+    audio.addEventListener('timeupdate', () => {
+      const t = audio.currentTime;
+      const dur = audio.duration || 91;
+      // Progress bar
+      if (demoProgressFill) demoProgressFill.style.width = (t / dur * 100) + '%';
+      if (demoDuration) demoDuration.textContent = formatTime(t) + ' / ' + formatTime(dur);
+      if (demoProgressBar) demoProgressBar.setAttribute('aria-valuenow', Math.round(t / dur * 100));
+
+      revealWords(t);
+    });
+
+    function revealWords(t) {
+      const segs = DEMO_TRANSCRIPT.segments;
+      let needsScroll = false;
+
+      for (let i = 0; i < segs.length; i++) {
+        const seg = segs[i];
+        if (seg.startTime > t) break;
+
+        // Create segment DOM if needed
+        if (!segmentEls[i]) {
+          const div = document.createElement('div');
+          div.className = 'demo-segment';
+          div.innerHTML =
+            '<div class="demo-segment-meta">' +
+              '<span class="demo-speaker demo-speaker-' + seg.speaker + '">' + seg.speakerLabel + '</span>' +
+              '<span class="demo-timestamp">' + formatTime(seg.startTime) + '</span>' +
+            '</div>' +
+            '<p class="demo-segment-text">' +
+              seg.words.map(w => '<span class="demo-word" data-time="' + w.time + '">' + w.text + '</span>').join(' ') +
+            '</p>';
+          demoTranscript.appendChild(div);
+          segmentEls[i] = div;
+          // Trigger entrance animation
+          requestAnimationFrame(() => { div.classList.add('visible'); });
+          needsScroll = true;
+        }
+
+        // Reveal words within this segment
+        const wordSpans = segmentEls[i].querySelectorAll('.demo-word');
+        for (let j = 0; j < wordSpans.length; j++) {
+          const wTime = parseFloat(wordSpans[j].dataset.time);
+          if (wTime <= t) {
+            if (!wordSpans[j].classList.contains('revealed')) {
+              wordSpans[j].classList.add('revealed');
+              needsScroll = true;
+            }
+          } else {
+            // Support seek backward
+            wordSpans[j].classList.remove('revealed');
+          }
+        }
+      }
+
+      // Remove segments that are after current time (seek backward)
+      for (let i = segs.length - 1; i >= 0; i--) {
+        if (segs[i].startTime > t && segmentEls[i]) {
+          segmentEls[i].remove();
+          segmentEls[i] = undefined;
+        }
+      }
+
+      // Auto-scroll
+      if (needsScroll) {
+        demoTranscript.scrollTo({
+          top: demoTranscript.scrollHeight,
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      }
+    }
+
+    // Audio ended — show summary
+    audio.addEventListener('ended', () => {
+      updatePlayButton(false);
+      if (demoSummary && demoSummaryText) {
+        summaryTimer = setTimeout(() => {
+          demoSummaryText.textContent = DEMO_TRANSCRIPT.summary;
+          demoSummary.hidden = false;
+          requestAnimationFrame(() => { demoSummary.classList.add('visible'); });
+          demoTranscript.scrollTo({
+            top: demoTranscript.scrollHeight + 200,
+            behavior: prefersReducedMotion ? 'auto' : 'smooth'
+          });
+        }, 800);
+      }
+    });
+
+    // Duration display once metadata loads
+    audio.addEventListener('loadedmetadata', () => {
+      if (demoDuration) demoDuration.textContent = '0:00 / ' + formatTime(audio.duration);
+    });
+
+    // Progress bar seek
+    if (demoProgressBar) {
+      function seekTo(e) {
+        const rect = demoProgressBar.getBoundingClientRect();
+        const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        audio.currentTime = ratio * (audio.duration || 91);
+        // Hide summary if seeking before end
+        if (demoSummary && ratio < 0.98) {
+          demoSummary.hidden = true;
+          demoSummary.classList.remove('visible');
+        }
+      }
+
+      demoProgressBar.addEventListener('click', seekTo);
+
+      // Drag support
+      let dragging = false;
+      demoProgressBar.addEventListener('mousedown', (e) => { dragging = true; seekTo(e); });
+      window.addEventListener('mousemove', (e) => { if (dragging) seekTo(e); });
+      window.addEventListener('mouseup', () => { dragging = false; });
+
+      // Keyboard (arrow keys seek ±5s)
+      demoProgressBar.addEventListener('keydown', (e) => {
+        const step = 5;
+        if (e.key === 'ArrowRight') { audio.currentTime = Math.min(audio.currentTime + step, audio.duration); e.preventDefault(); }
+        if (e.key === 'ArrowLeft')  { audio.currentTime = Math.max(audio.currentTime - step, 0); e.preventDefault(); }
+        if (e.key === 'Home')       { audio.currentTime = 0; e.preventDefault(); }
+        if (e.key === 'End')        { audio.currentTime = audio.duration; e.preventDefault(); }
+      });
+    }
   }
 
 })();
