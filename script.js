@@ -37,6 +37,57 @@
   })();
 
   /* ------------------------------------------------
+     0b. Sponsor announcement bar
+     Hidden by default — only appears AFTER the user has
+     clicked a Download link at least once (tracked in
+     localStorage). Dismissible for 30 days after that.
+     ------------------------------------------------ */
+  (function setupSponsorBanner() {
+    const bar = document.getElementById('announce-bar');
+    const close = document.getElementById('announce-close');
+    if (!bar || !close) return;
+
+    const DOWNLOADED_KEY = 'sbobino.downloaded';
+    const DISMISSED_KEY = 'sbobino.sponsor-banner.dismissedAt';
+    const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+
+    function storageGet(key) {
+      try { return localStorage.getItem(key); } catch (_) { return null; }
+    }
+    function storageSet(key, value) {
+      try { localStorage.setItem(key, value); } catch (_) {}
+    }
+
+    function showBarIfEligible() {
+      if (storageGet(DOWNLOADED_KEY) !== '1') return false;
+      const prev = Number(storageGet(DISMISSED_KEY) || 0);
+      if (prev && Date.now() - prev < THIRTY_DAYS) return false;
+      bar.classList.remove('is-hidden');
+      return true;
+    }
+
+    // Start hidden; reveal only if the user has downloaded before.
+    bar.classList.add('is-hidden');
+    showBarIfEligible();
+
+    // Any anchor tagged [data-download] marks the user as "downloaded" and
+    // surfaces the banner immediately (in case they stay on the same tab).
+    document.querySelectorAll('a[data-download]').forEach((link) => {
+      link.addEventListener('click', () => {
+        storageSet(DOWNLOADED_KEY, '1');
+        // Clear any prior dismissal so the nudge is fresh after an upgrade.
+        storageSet(DISMISSED_KEY, '0');
+        showBarIfEligible();
+      });
+    });
+
+    close.addEventListener('click', () => {
+      bar.classList.add('is-hidden');
+      storageSet(DISMISSED_KEY, String(Date.now()));
+    });
+  })();
+
+  /* ------------------------------------------------
      1. Mobile menu
      ------------------------------------------------ */
   const toggle = document.querySelector('.menu-toggle');

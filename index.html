@@ -45,6 +45,26 @@
   <!-- Warp vignette overlay (visible during fast scroll / orbital transfers) -->
   <div class="warp-vignette" id="warp-vignette" aria-hidden="true"></div>
 
+  <!-- ========== TOP SPONSOR ANNOUNCEMENT (shown after first Download) ========== -->
+  <div class="announce-bar" id="announce-bar" role="region" aria-label="Sponsor announcement">
+    <div class="wrap announce-inner">
+      <div class="announce-text">
+        <span class="announce-label">Thanks for downloading</span>
+        <span class="announce-body">Help bring Sbobino to <strong>Windows</strong> and <strong>Intel Macs</strong> — your support funds new features and cross-platform builds.</span>
+      </div>
+      <div class="announce-actions">
+        <a href="https://buymeacoffee.com/pietromastro" target="_blank" rel="noopener" class="btn btn-bmc">
+          ☕ Buy me a coffee
+        </a>
+        <a href="https://github.com/sponsors/pietroMastro92" target="_blank" rel="noopener" class="btn btn-sponsor" aria-label="Sponsor on GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.649 1.78 1.498 3.762 2.6 4.885 3.149.333.163.667.163 1 0 1.123-.549 3.105-1.651 4.885-3.149C17.42 9.644 19 7.65 19 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C11.359 3.486 10.123 2.5 8.75 2.5c-1.336 0-2.75 1.164-2.75 3 0 .795.26 1.575.757 2.357a.75.75 0 11-1.264.807C4.883 7.718 4.5 6.65 4.5 5.5c0-1.836-1.414-3-2.75-3z" transform="translate(-1.5 0)"/></svg>
+          Sponsor on GitHub
+        </a>
+      </div>
+      <button class="announce-close" id="announce-close" aria-label="Dismiss sponsor announcement">&times;</button>
+    </div>
+  </div>
+
   <!-- ========== HEADER ========== -->
   <header class="site-header">
     <div class="wrap header-inner">
@@ -70,7 +90,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub
         </a>
-        <a href="https://github.com/pietroMastro92/Sbobino/releases/latest" target="_blank" rel="noopener" class="btn btn-primary">Download</a>
+        <a href="https://github.com/pietroMastro92/Sbobino/releases/latest" target="_blank" rel="noopener" class="btn btn-primary" data-download>Download</a>
       </div>
     </div>
   </header>
@@ -84,12 +104,29 @@
           <h1>Turn recordings into transcripts, summaries, and documents you can actually use.</h1>
           <p class="hero-sub">Sbobino helps students and professionals transform lessons, meetings, interviews, and voice notes into clear, reusable material — all inside a local-first desktop workflow.</p>
           <div class="hero-ctas">
-            <a href="https://github.com/pietroMastro92/Sbobino/releases/latest" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+            <a href="https://github.com/pietroMastro92/Sbobino/releases/latest" target="_blank" rel="noopener" class="btn btn-primary btn-lg" data-download>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               Download <span class="latest-version" data-fallback="v0.1.15">v0.1.15</span>
             </a>
             <a href="#features" class="btn btn-ghost btn-lg">See features</a>
           </div>
+
+          <!-- Sponsorship row under the first Download CTA — same style as the footer banner -->
+          <aside class="support-inline" aria-label="Support development">
+            <div class="support-inline-text">
+              <span class="support-inline-label">Open source &amp; free</span>
+              <p>Help bring Sbobino to <strong>Windows</strong> and <strong>Intel Macs</strong> — your support funds new features and cross-platform builds.</p>
+            </div>
+            <div class="support-inline-actions">
+              <a href="https://buymeacoffee.com/pietromastro" target="_blank" rel="noopener" class="btn btn-bmc">
+                ☕ Buy me a coffee
+              </a>
+              <a href="https://github.com/sponsors/pietroMastro92" target="_blank" rel="noopener" class="btn btn-sponsor" aria-label="Sponsor on GitHub">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.649 1.78 1.498 3.762 2.6 4.885 3.149.333.163.667.163 1 0 1.123-.549 3.105-1.651 4.885-3.149C17.42 9.644 19 7.65 19 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.75.75 0 01-1.442 0C11.359 3.486 10.123 2.5 8.75 2.5c-1.336 0-2.75 1.164-2.75 3 0 .795.26 1.575.757 2.357a.75.75 0 11-1.264.807C4.883 7.718 4.5 6.65 4.5 5.5c0-1.836-1.414-3-2.75-3z" transform="translate(-1.5 0)"/></svg>
+                Sponsor on GitHub
+              </a>
+            </div>
+          </aside>
         </div>
         <div class="hero-visual">
           <div class="hero-screenshot">
@@ -553,7 +590,7 @@
         <div class="cta-card">
           <h2>Less rewinding. More understanding.</h2>
           <p>Sbobino turns lessons, meetings, and voice notes into transcripts, summaries, and documents you can actually use.</p>
-          <a href="https://github.com/pietroMastro92/Sbobino/releases/latest" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
+          <a href="https://github.com/pietroMastro92/Sbobino/releases/latest" target="_blank" rel="noopener" class="btn btn-primary btn-lg" data-download>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download Sbobino
           </a>
