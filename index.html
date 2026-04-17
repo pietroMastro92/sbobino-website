@@ -86,7 +86,7 @@
           <div class="hero-ctas">
             <a href="https://github.com/pietroMastro92/Sbobino/releases/latest" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Download v0.1.15
+              Download <span class="latest-version" data-fallback="v0.1.15">v0.1.15</span>
             </a>
             <a href="#features" class="btn btn-ghost btn-lg">See features</a>
           </div>
@@ -170,10 +170,6 @@
               </div>
               <div class="demo-sidebar-divider"></div>
               <div class="demo-sidebar-label">Open</div>
-              <div class="demo-sidebar-item">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-                artemis-ii-n…
-              </div>
               <div class="demo-sidebar-item demo-sidebar-active">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
                 artemis-ii-n…
@@ -197,6 +193,30 @@
                   </svg>
                   <p>Press <strong>Play</strong> to start the transcription demo.</p>
                 </div>
+              </div>
+
+              <!-- Bottom player bar (centered only under transcript, like the real app) -->
+              <div class="demo-player-bar">
+                <span class="demo-play-wrap">
+                  <span class="demo-play-nudge" aria-hidden="true">Try it — press play</span>
+                <button class="demo-player-play demo-player-play-pulse" id="demo-play" aria-label="Play demo">
+                  <svg class="demo-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                  <svg class="demo-icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                </button>
+                </span>
+                <div class="demo-progress" role="slider" aria-label="Audio position"
+                     aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                     tabindex="0" id="demo-progress">
+                  <div class="demo-progress-fill" id="demo-progress-fill"></div>
+                </div>
+                <span class="demo-duration" id="demo-duration">0:00 / 0:00</span>
+                <span class="demo-player-speed">1x</span>
+                <button class="demo-player-reset" id="demo-reset" aria-label="Restart demo" title="Restart">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                </button>
+                <button class="demo-toolbar-btn" aria-hidden="true" style="margin-left:2px">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
               </div>
             </main>
 
@@ -269,27 +289,6 @@
                 </div>
               </div>
             </aside>
-          </div>
-
-          <!-- Bottom player bar -->
-          <div class="demo-player-bar">
-            <button class="demo-player-play" id="demo-play" aria-label="Play demo">
-              <svg class="demo-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-              <svg class="demo-icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
-            </button>
-            <div class="demo-progress" role="slider" aria-label="Audio position"
-                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                 tabindex="0" id="demo-progress">
-              <div class="demo-progress-fill" id="demo-progress-fill"></div>
-            </div>
-            <span class="demo-duration" id="demo-duration">0:00 / 0:00</span>
-            <span class="demo-player-speed">1x</span>
-            <button class="demo-player-reset" id="demo-reset" aria-label="Restart demo" title="Restart">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-            </button>
-            <button class="demo-toolbar-btn" aria-hidden="true" style="margin-left:2px">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
           </div>
 
           <!-- Settings link (bottom-left like app) -->

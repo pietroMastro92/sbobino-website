@@ -771,7 +771,8 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 .demo-app-body {
   display: grid;
   grid-template-columns: 160px 1fr 260px;
-  min-height: 420px;
+  height: 520px;
+  min-height: 0;
 }
 
 /* Left sidebar */
@@ -817,11 +818,12 @@ h3 { font-size: 1.15rem; font-weight: 600; }
   display: flex; flex-direction: column;
   background: transparent;
   backdrop-filter: blur(8px);
+  min-height: 0; height: 100%;
 }
 .demo-transcript {
-  flex: 1; padding: 20px 28px;
+  flex: 1 1 auto; min-height: 0;
+  padding: 20px 28px;
   overflow-y: auto; scroll-behavior: smooth;
-  max-height: 420px;
 }
 .demo-transcript::-webkit-scrollbar { width: 5px; }
 .demo-transcript::-webkit-scrollbar-track { background: transparent; }
@@ -1097,6 +1099,62 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 .demo-player-play:hover, .demo-player-reset:hover {
   color: var(--ink); background: rgba(255,255,255,0.08);
 }
+
+/* Wrapper for the play button + floating nudge callout */
+.demo-play-wrap {
+  position: relative; display: inline-flex; align-items: center;
+}
+
+/* Pulse attention ring around the Play button until first interaction */
+.demo-player-play-pulse {
+  position: relative;
+  color: #DFD0B8;
+  background: rgba(148,137,121,0.18);
+  box-shadow: 0 0 0 0 rgba(148,137,121,0.55);
+  animation: demoPlayPulse 1.8s ease-out infinite;
+}
+.demo-player-play-pulse:hover {
+  background: rgba(148,137,121,0.28);
+}
+@keyframes demoPlayPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(148,137,121,0.55); }
+  70%  { box-shadow: 0 0 0 12px rgba(148,137,121,0); }
+  100% { box-shadow: 0 0 0 0 rgba(148,137,121,0); }
+}
+
+/* Floating "Try it — press play" callout above the play button */
+.demo-play-nudge {
+  position: absolute; left: 50%; bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 5px 10px; border-radius: 999px;
+  background: linear-gradient(135deg, rgba(148,137,121,0.95), rgba(200,184,156,0.9));
+  color: #1a1d22; font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.08);
+  pointer-events: none;
+  animation: demoNudgeBob 2.2s ease-in-out infinite;
+  z-index: 2;
+}
+.demo-play-nudge::after {
+  content: ''; position: absolute; left: 50%; top: 100%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(200,184,156,0.9);
+}
+@keyframes demoNudgeBob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(-3px); }
+}
+
+/* Once the user interacts, the app body gets .demo-started — stop nudging */
+.demo-app.demo-started .demo-player-play-pulse {
+  animation: none;
+  box-shadow: none;
+  background: none;
+  color: var(--muted);
+}
+.demo-app.demo-started .demo-play-nudge { display: none; }
 /* macOS-style slider: thin track + circular handle visible on hover */
 .demo-progress {
   flex: 1; height: 4px; background: rgba(255,255,255,0.08);

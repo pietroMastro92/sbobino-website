@@ -13,6 +13,30 @@
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ------------------------------------------------
+     0. Latest release version (GitHub API)
+     Fetches the latest release tag and updates every
+     .latest-version element. Falls back silently to
+     the hardcoded text on error / rate-limit.
+     ------------------------------------------------ */
+  (function updateLatestVersion() {
+    const targets = document.querySelectorAll('.latest-version');
+    if (!targets.length) return;
+
+    fetch('https://api.github.com/repos/pietroMastro92/Sbobino/releases/latest', {
+      headers: { 'Accept': 'application/vnd.github+json' },
+    })
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .then((data) => {
+        const tag = typeof data.tag_name === 'string' ? data.tag_name.trim() : '';
+        if (!tag) return;
+        // Normalize to leading "v"
+        const label = tag.startsWith('v') ? tag : 'v' + tag;
+        targets.forEach((el) => { el.textContent = label; });
+      })
+      .catch(() => { /* keep fallback */ });
+  })();
+
+  /* ------------------------------------------------
      1. Mobile menu
      ------------------------------------------------ */
   const toggle = document.querySelector('.menu-toggle');
@@ -504,6 +528,7 @@
     let segmentEls = []; // track created segment DOMs
     let summaryTimer = null;
     let resetting = false;
+    const demoApp = document.querySelector('.demo-app');
 
     function formatTime(s) {
       const m = Math.floor(s / 60);
@@ -526,6 +551,8 @@
       } else {
         // Hide placeholder on first play
         if (demoPlaceholder) demoPlaceholder.style.display = 'none';
+        // Stop the pulse/nudge — user has engaged
+        if (demoApp) demoApp.classList.add('demo-started');
         audio.play();
         updatePlayButton(true);
       }
@@ -547,6 +574,8 @@
       if (demoProgressFill) demoProgressFill.style.width = '0%';
       if (demoDuration) demoDuration.textContent = '0:00 / ' + formatTime(audio.duration || 91);
       if (summaryTimer) { clearTimeout(summaryTimer); summaryTimer = null; }
+      // Bring back the pulse/nudge so the next visitor is invited to play again
+      if (demoApp) demoApp.classList.remove('demo-started');
       setTimeout(() => { resetting = false; }, 100);
     });
 
