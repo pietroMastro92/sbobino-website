@@ -1755,6 +1755,8 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 
   .demo-word {
     opacity: 1;
+    transition: none;
+    filter: none;
   }
 
   .demo-player-bar {
@@ -1762,6 +1764,10 @@ h3 { font-size: 1.15rem; font-weight: 600; }
     padding: 12px 12px 14px;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .demo-progress-fill::after {
+    transform: translateY(-50%) scale(1);
   }
 
   .demo-play-wrap {
@@ -1836,6 +1842,15 @@ h3 { font-size: 1.15rem; font-weight: 600; }
   .demo-player-speed,
   .demo-duration {
     display: none;
+  }
+
+  .demo-segment-meta {
+    margin-bottom: 6px;
+  }
+
+  .demo-speaker {
+    padding: 3px 7px;
+    font-size: 0.76rem;
   }
 }
 
