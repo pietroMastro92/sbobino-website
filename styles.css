@@ -1754,9 +1754,8 @@ h3 { font-size: 1.15rem; font-weight: 600; }
   }
 
   .demo-word {
-    opacity: 1;
-    transition: none;
-    filter: none;
+    opacity: 0.1;
+    transition: opacity 0.2s ease;
   }
 
   .demo-player-bar {
@@ -1767,7 +1766,7 @@ h3 { font-size: 1.15rem; font-weight: 600; }
   }
 
   .demo-progress-fill::after {
-    transform: translateY(-50%) scale(1);
+    transform: translateY(-50%) scale(0);
   }
 
   .demo-play-wrap {
@@ -1845,12 +1844,12 @@ h3 { font-size: 1.15rem; font-weight: 600; }
   }
 
   .demo-segment-meta {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   .demo-speaker {
-    padding: 3px 7px;
-    font-size: 0.76rem;
+    padding: 4px 8px;
+    font-size: 0.82rem;
   }
 }
 
