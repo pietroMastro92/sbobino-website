@@ -74,6 +74,9 @@
     // surfaces the banner immediately (in case they stay on the same tab).
     document.querySelectorAll('a[data-download]').forEach((link) => {
       link.addEventListener('click', () => {
+        const asset = link.getAttribute('data-download-asset') || 'unknown';
+        // Tracking happens server-side in /api/download.
+        // The link itself already points there, so no extra client request is needed.
         storageSet(DOWNLOADED_KEY, '1');
         // Clear any prior dismissal so the nudge is fresh after an upgrade.
         storageSet(DISMISSED_KEY, '0');

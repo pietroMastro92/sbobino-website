@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sbobino — Admin Downloads</title>
+  <meta name="description" content="Private dashboard for Sbobino download analytics.">
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    .admin-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    .admin-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      line-height: 1.1;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 70ch;
+      margin-bottom: 20px;
+    }
+
+    .login-panel {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .login-panel input {
+      flex: 1 1 320px;
+      min-width: 240px;
+      background: rgba(255,255,255,0.05);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      outline: none;
+    }
+
+    .login-panel input:focus {
+      border-color: var(--line-hover);
+      box-shadow: 0 0 0 4px rgba(240, 160, 80, 0.12);
+    }
+
+    .btn-primary-dark {
+      border: 0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      background: var(--accent);
+      color: #140b06;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .18s ease, filter .18s ease;
+    }
+
+    .btn-primary-dark:hover { transform: translateY(-1px); filter: brightness(1.03); }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+
+    .hidden { display: none; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card,
+    .panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(14px);
+    }
+
+    .stat-card {
+      padding: 18px;
+      min-height: 122px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-top: 8px;
+    }
+
+    .stat-sub {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+
+    .panels {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .panel h2 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+    }
+
+    .meta-line {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 12px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--ink);
+      font-size: 0.9rem;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: rgba(0,0,0,0.26);
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      overflow: auto;
+      color: #f7f0ff;
+    }
+
+    .events {
+      display: grid;
+      gap: 10px;
+    }
+
+    .event {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .event strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .event small {
+      color: var(--muted);
+      display: block;
+      margin-top: 4px;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .stats-grid,
+      .panels {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="admin-shell">
+    <div class="admin-topbar">
+      <a class="brand" href="/">
+        <img src="assets/icon.png" alt="Sbobino">
+        <div class="brand-text">
+          <strong>Sbobino</strong>
+          <span>Private downloads admin</span>
+        </div>
+      </a>
+      <a class="back-link" href="/">← Back to site</a>
+    </div>
+
+    <section class="hero">
+      <h1>Downloads dashboard</h1>
+      <p>Private analytics for Sbobino downloads. This view is intentionally locked down: only someone with the token can read totals, recent activity, and daily breakdowns.</p>
+
+      <div class="login-panel">
+        <input id="token" type="password" placeholder="Enter DOWNLOAD_STATS_TOKEN" autocomplete="current-password" />
+        <button id="load" class="btn-primary-dark">Unlock dashboard</button>
+      </div>
+      <div class="hint">The dashboard calls <code>/api/stats</code> with a bearer token. No token, no data.</div>
+    </section>
+
+    <section id="content" class="hidden">
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-label">Total downloads</div>
+          <div class="stat-value" id="total">0</div>
+          <div class="stat-sub">All tracked assets combined</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">DMG</div>
+          <div class="stat-value" id="dmg">0</div>
+          <div class="stat-sub">Installer downloads</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">App tar.gz</div>
+          <div class="stat-value" id="app">0</div>
+          <div class="stat-sub">Bundle downloads</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Recent events</div>
+          <div class="stat-value" id="events-count">0</div>
+          <div class="stat-sub">Latest events loaded in this session</div>
+        </article>
+      </div>
+
+      <div class="panels">
+        <section class="panel">
+          <h2>Downloads by day</h2>
+          <div class="meta-line">JSON snapshot of the stored daily counts.</div>
+          <pre id="byday">{}</pre>
+        </section>
+
+        <section class="panel">
+          <h2>Quick summary</h2>
+          <div class="chips" id="summary-chips">
+            <span class="chip">Protected access</span>
+            <span class="chip">Persistent storage</span>
+            <span class="chip">Free stack</span>
+          </div>
+          <div class="meta-line">Recent events are kept short so you can inspect them fast.</div>
+          <div class="events" id="events"></div>
+        </section>
+      </div>
+
+      <div class="footer-note">Tip: if you want, I can add a tiny chart next. For now this is already production-style, private, and cheap to run.</div>
+    </section>
+  </main>
+
+  <script>
+    const tokenInput = document.getElementById('token');
+    const loadBtn = document.getElementById('load');
+    const content = document.getElementById('content');
+    const total = document.getElementById('total');
+    const dmg = document.getElementById('dmg');
+    const app = document.getElementById('app');
+    const eventsCount = document.getElementById('events-count');
+    const byday = document.getElementById('byday');
+    const events = document.getElementById('events');
+
+    function eventLabel(row) {
+      if (!row) return 'unknown';
+      return row.asset || 'unknown';
+    }
+
+    async function loadStats() {
+      const token = tokenInput.value.trim();
+      if (!token) return;
+      const res = await fetch('/api/stats', { headers: { Authorization: `Bearer ${token}` } });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error || 'Failed to load stats');
+        return;
+      }
+
+      total.textContent = data.total ?? 0;
+      dmg.textContent = data.dmg ?? 0;
+      app.textContent = data.app ?? 0;
+      byday.textContent = JSON.stringify(data.byday || {}, null, 2);
+
+      events.innerHTML = '';
+      const rows = Array.isArray(data.events) ? data.events : [];
+      eventsCount.textContent = rows.length;
+      rows.forEach((e) => {
+        const div = document.createElement('div');
+        div.className = 'event';
+        div.innerHTML = `
+          <strong>${eventLabel(e)}</strong>
+          <small>${e.ts || ''}</small>
+          <small>${e.referrer || 'no referrer'}</small>
+        `;
+        events.appendChild(div);
+      });
+
+      content.classList.remove('hidden');
+    }
+
+    loadBtn.addEventListener('click', loadStats);
+    tokenInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') loadStats();
+    });
+  </script>
+</body>
+</html>
