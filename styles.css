@@ -1705,15 +1705,83 @@ h3 { font-size: 1.15rem; font-weight: 600; }
     transform: perspective(1200px) rotateY(0deg) translateY(20px);
   }
 
+  .demo-app {
+    border-radius: 16px;
+  }
+
+  .demo-app .mac-titlebar {
+    padding: 8px 12px;
+  }
+
   .demo-app-body {
     grid-template-columns: 1fr;
     min-height: auto;
+    height: auto;
   }
-  .demo-sidebar, .demo-sidebar-right { display: none; }
-  .demo-toolbar { display: none; }
-  .demo-settings-bar { display: none; }
-  .demo-transcript { max-height: 300px; }
-  .demo-segment.demo-segment-s2 { margin: 0 -20px; padding: 10px 20px; }
+
+  .demo-main {
+    min-height: 0;
+  }
+
+  .demo-sidebar,
+  .demo-sidebar-right,
+  .demo-toolbar,
+  .demo-settings-bar {
+    display: none;
+  }
+
+  .demo-transcript {
+    padding: 14px 16px 16px;
+    max-height: 52vh;
+  }
+
+  .demo-placeholder {
+    min-height: 220px;
+  }
+
+  .demo-segment {
+    padding: 12px 0;
+  }
+
+  .demo-segment.demo-segment-s2 {
+    margin: 0 -12px;
+    padding: 10px 12px;
+  }
+
+  .demo-segment-text {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .demo-word {
+    opacity: 1;
+  }
+
+  .demo-player-bar {
+    gap: 10px;
+    padding: 12px 12px 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .demo-play-wrap {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .demo-player-play {
+    transform: scale(0.95);
+  }
+
+  .demo-progress {
+    min-width: 100%;
+  }
+
+  .demo-duration,
+  .demo-player-speed {
+    font-size: 0.76rem;
+  }
 
   .audience-grid {
     grid-template-columns: 1fr;
@@ -1745,12 +1813,30 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 
 @media (max-width: 520px) {
   :root {
-    --section-pad: 48px;
+    --section-pad: 44px;
   }
 
-  .wrap { padding: 0 16px; }
+  .wrap { padding: 0 14px; }
 
   h1 { font-size: 1.7rem; }
+
+  .demo-app {
+    border-radius: 14px;
+  }
+
+  .demo-transcript {
+    max-height: 48vh;
+    padding: 12px 14px 14px;
+  }
+
+  .demo-player-bar {
+    padding: 10px 10px 12px;
+  }
+
+  .demo-player-speed,
+  .demo-duration {
+    display: none;
+  }
 }
 
 /* ---------- Reduced Motion ---------- */
