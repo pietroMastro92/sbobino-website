@@ -12,3 +12,5 @@ assets/*.txt
 
 # Claude Code project files
 .claude/
+.vercel
+.env*.local
